@@ -4,6 +4,9 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
 const routes = require('./routes');
+const userRoutes = require('./userRoutes');
+const thoughtRoutes = require('./thoughtRoutes');
+
 
 dotenv.config();
 
