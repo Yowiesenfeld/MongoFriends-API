@@ -2,9 +2,9 @@
   "name": "mongofriends-api",
   "version": "1.0.0",
   "description": "",
-  "main": "apps.js",
+  "main": "apps.js",  
   "scripts": {
-    "start": "node app.js"
+    "start": "node apps.js"
   },
   "author": "",
   "license": "ISC",

@@ -5,9 +5,8 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
 const morgan = require('morgan'); 
-const routes = require('./routes');
-const userRoutes = require('./userRoutes'); 
-const thoughtRoutes = require('./thoughtRoutes'); 
+const userRoutes = require('./routes/userRoutes'); 
+const thoughtRoutes = require('./routes/thoughtRoutes'); 
 
 dotenv.config();
 
@@ -23,8 +22,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // Routes
 app.use('/api', routes);
-app.use('/api/users', userRoutes);
-app.use('/api/thoughts', thoughtRoutes);
+app.use('/users', userRoutes);
+app.use('/thoughts', thoughtRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {

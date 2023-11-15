@@ -1,4 +1,8 @@
-const { User, Thought } = require('../models');
+const path = require('path');
+const { Thought } = require(path.join(__dirname, '../models'));
+
+// const { User, Thought } = require('./models');
+const mongoose = require('mongoose'); // Import mongoose for ObjectId validation
 
 const userController = {
   // Get all users
@@ -79,6 +83,11 @@ const userController = {
   // Add a new friend to a user's friend list
   async addFriend(req, res) {
     try {
+      // Validate that both userId and friendId are valid ObjectIds
+      if (!mongoose.Types.ObjectId.isValid(req.params.userId) || !mongoose.Types.ObjectId.isValid(req.params.friendId)) {
+        return res.status(400).json({ error: 'Invalid user ID or friend ID provided' });
+      }
+
       const user = await User.findByIdAndUpdate(
         req.params.userId,
         { $addToSet: { friends: req.params.friendId } },
@@ -99,6 +108,11 @@ const userController = {
   // Remove a friend from a user's friend list
   async removeFriend(req, res) {
     try {
+      // Validate that both userId and friendId are valid ObjectIds
+      if (!mongoose.Types.ObjectId.isValid(req.params.userId) || !mongoose.Types.ObjectId.isValid(req.params.friendId)) {
+        return res.status(400).json({ error: 'Invalid user ID or friend ID provided' });
+      }
+
       const user = await User.findByIdAndUpdate(
         req.params.userId,
         { $pull: { friends: req.params.friendId } },
